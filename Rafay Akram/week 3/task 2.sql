@@ -11,9 +11,21 @@ FROM Orders
 WHERE CustomerID IS NULL
 ORDER BY OrderDate;
 
---Retrieve the category names of all products, as well as the countries to which orders have been shipped, without any duplicates:
-SELECT DISTINCT Categories.CategoryName, ShipCountry
-FROM Products
-INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID
-INNER JOIN "Order Details" ON Products.ProductID = Order Details.ProductID
-INNER JOIN Orders ON Order Details.OrderID = Orders.OrderID;
+-- --Retrieve the category names of all products, as well as the countries to which orders have been shipped, without any duplicates:
+
+-- SELECT DISTINCT Categories.CategoryName, ShipCountry
+-- FROM Products
+-- INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID
+-- INNER JOIN "Order Details" ON Products.ProductID = Order Details.ProductID
+-- INNER JOIN Orders ON Order Details.OrderID = Orders.OrderID;
+
+--3-- Retrieve the category names of all products, as well as the countries to which orders have been shipped, without any duplicates.
+
+
+SELECT * from Orders
+SELECT * from Products
+SELECT * from Categories
+SELECT * FROM [Order Details]
+
+SELECT DISTINCT CategoryName, ShipCountry FROM Products, Orders, [Order Details], Categories WHERE Products.ProductID = [Order Details].ProductID
+AND [Order Details].OrderID = Orders.OrderID AND Products.CategoryID = Categories.CategoryID;
